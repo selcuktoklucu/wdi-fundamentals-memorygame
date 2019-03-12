@@ -25,9 +25,10 @@ var cards = [
 /////----------
 var cardsInPlay=[];
 var checkForMatch= function(){
-	setAttribute('src',cards[cardId].cardImage);
+
+	
 	if(cardsInPlay.length == 2){
-		if(cardsInPlay[0]===cardsInPlay[1]){
+		if(cardsInPlay[0].rank===cardsInPlay[1].rank){
 			alert("You found match!");
 
 	}
@@ -37,11 +38,14 @@ var checkForMatch= function(){
 } 
 }
 var flipCard = function (){
-	this.getAttribute('data-id');
+	var cardId = this.getAttribute('data-id');
 	console.log("the card was flipped over "+ cards[cardId].rank);
 	cardsInPlay.push(cards[cardId]);
 
 	console.log(cards[cardId].cardImage);
+	this.setAttribute('src',cards[cardId].cardImage);
+
+
 	console.log(cards[cardId].suit);
 
 	//instructions are not clear at project pbecause it shows both cardOne and cardTwo
@@ -55,13 +59,14 @@ var flipCard = function (){
 
 var createBoard = function(){
 
-	for (var i = 0; i < cardsInPlay.length; i++) {
+	for (var i = 0; i < cards.length; i++) {
     // Logic here
     	var cardElement = document.createElement('img');
     	cardElement.setAttribute('src',"images/back.png");
     	cardElement.setAttribute('data-id',i);
-    	cardElement.appendChild('game-board');
+    	
     	cardElement.addEventListener('click',flipCard);
+    	document.getElementById("game-board").appendChild(cardElement);
 }
 	
 
